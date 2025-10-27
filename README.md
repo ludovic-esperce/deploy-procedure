@@ -15,7 +15,7 @@ Pré-requis :
 
 ## Etapes à suivre
 
-1. Se connecter en SSH (ligne de commande) à votre serveur
+1. Se connecter au serveur
 2. Créer une clef SSH pour le serveur
 3. Ajouter la clef SSH à Github
 4. Cloner sur le projet conteneurisé sur le serveur
@@ -31,13 +31,20 @@ Ces différentes étapes seront détaillées dans la suite de cette procédure.
 
 ### 1 - Connexion en SSH
 
-> [!TIP]
-> Afin que vous puissiez vous connecter en SSH sur le serveur votre **clef publique** SSH doit être ajoutée au serveur (dans le dossier ".ssh" du "home" de l'utilisateur).
-
 Pour se connecter au serveur vous pouvez utiliser la commande suivante :
 ```sh
 ssh <user>@<ip>
 ```
+
+> [!CAUTION]
+> A la première connexion pensez à [modifier votre mot de passe](https://linuxize.com/post/how-to-change-user-password-in-linux/#change-your-user-password).
+
+> [!IMPORTANT]  
+> Si vous clef SSH n'est pas ajoutée au serveur la connexion se fera pas mot de passe utilisateur.
+>
+> Il est conseillé d'ajouter votre clef SSH pour pouvoir vous connecter en utilisant ce protocol.
+>
+> Afin d'ajouter la clef SSH vous pourrez suivre la procédure disponible [ici](https://linuxhandbook.com/add-ssh-public-key-to-server/).
 
 ### 2 - Créer une clef SSH pour le serveur
 
@@ -56,7 +63,7 @@ Pour la création et l'ajout de cette clef de déploiement à votre dépôt vous
 
 Commande possible (si submodules):
 ```sh
-git clone --recurse-sumodules <url-ssh>
+git clone --recurse-submodules <url-ssh>
 ```
 
 > [!IMPORTANT]  
