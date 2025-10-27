@@ -8,8 +8,8 @@ Compétences abordées :
 
 Pré-requis :
 - [application web conteneurisée](https://github.com/afpa-learning/stack-spring-react-postgres-docker?tab=readme-ov-file) ;
-- client SSH installé sur votre ordinateur (par défaut sur Windows) ;
-- [client Git](https://winget.run/pkg/Git/Git) installé sur votre ordainteur ;
+- client SSH installé sur votre poste de travail (par défaut sur Windows) ;
+- [client Git](https://winget.run/pkg/Git/Git) installé sur votre poste de travail ;
 - clef SSH publiques ajoutées sur votre serveur et connexion possible ;
 - Docker engine installé sur le serveur.
 
