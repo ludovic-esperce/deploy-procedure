@@ -1,6 +1,6 @@
-# Déploiement conteunerisé manuel
+# Déploiement conteneurisé manuel
 
-Cette procédure a pour objectif de détailler les étapes à suivre pour vous permettre de **déployer manuellement un application conteunerisé**.
+Cette procédure a pour objectif de détailler les étapes à suivre pour vous permettre de **déployer manuellement une application conteneurisée**.
 
 Compétences abordées :
 - utilisation de SSH pour conexion à un serveur ;
