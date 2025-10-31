@@ -88,6 +88,9 @@ Voici un exemple de commande pour créer une clef spécifique nommée "deploy-ba
 ssh-keygen -t ed25519 -C "deploy-back" -f ~/.ssh/deploy-back
 ```
 
+> [!IMPORTANT]  
+> Il vous est possible de créer des clefs SSH sans passphrase.
+
 L'idée est de pouvoir utiliser chacune des ces clefs pour chaque submodule (nécessaire car il est impossible d'utiliser plusiers fois la même clef SSH).
 
 Pour que cela fonctionne il faut modifier deux choses :
