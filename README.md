@@ -19,7 +19,7 @@ Pré-requis :
 2. Créer plusieurs clefs SSH pour le serveur
 3. Ajouter les clefs de déploiement au différents dépôts
 4. Configurer le client SSH du serveur
-5. Changer les URL des submodules sur la branche de déploiement
+5. Changer les URL des submodules sur la branche de déploiement du projet global
 6. Cloner sur le projet conteneurisé sur le serveur
 7. Démarrer la stack conteunerisée
 
@@ -28,7 +28,8 @@ Ces différentes étapes seront détaillées dans la suite de cette procédure.
 > [!IMPORTANT]  
 > Vous allez partager un serveur à plusieurs.
 >
-> Il est fort probable que certaines commandes interfères avec les autres.
+> Il est fort probable que certaines commandes interfèrent avec les autres.
+>
 > A vous d'échanger et de vous synchroniser pour mener à bien le déploiement. 
 
 ### 1 - Connexion en SSH
@@ -52,16 +53,18 @@ ssh <user>@<ip>
 
 L'objectif est de pouvoir récupérer le code du projet à partir d'un dépôt Git.
 
-Pour se faire vous pouvez créer plusieurs celfs SSH sur le serveur qui nous servira uniquement pour le déploiement.
+Pour se faire, vous pouvez créer plusieurs clefs SSH sur le serveur qui nous serviront uniquement pour le déploiement.
 
 > [!WARNING]  
-> Ne mettez pas votre clef SSH privée personnelle sur le serveur. Il vous faut absolument recréer une clef propre au déploiement.
+> Ne mettez pas votre clef SSH privée personnelle sur le serveur.
 >
-> Pour permettre à une machine de récupérer en SSH le code **d'un seul dépôt** Github propose la création de "clef de déploiement".
+> Il vous faut **absolument** recréer des clefs propres au déploiement.
+>
+> Pour permettre à une machine de récupérer en SSH le code **d'un seul dépôt** Github propose la création de **"clef de déploiement"**.
 
 Pour la création et l'ajout de cette clef de déploiement à votre dépôt vous pourrez vous référer à la [documentation disponible ici](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#set-up-deploy-keys).
 
-Il vous faut créer 1 clef SSH de deploiement par dépôt.
+Il vous faut créer **1 clef SSH de deploiement par dépôt**.
 
 Voici, par exemple, l'ensemble des "deploy keys" créées pour un projet avec 3 submodules :
 ```sh
@@ -88,8 +91,8 @@ Voici un exemple de commande pour créer une clef spécifique nommée "deploy-ba
 ssh-keygen -t ed25519 -C "deploy-back" -f ~/.ssh/deploy-back
 ```
 
-> [!IMPORTANT]  
-> Il vous est possible de créer des clefs SSH sans passphrase.
+> [!IMPORTANT] 
+> Il vous est possible de créer des clefs SSH sans passphrase pour faciliter l'opération de récupération du dépôt (clone).
 
 L'idée est de pouvoir utiliser chacune des ces clefs pour chaque submodule (nécessaire car il est impossible d'utiliser plusiers fois la même clef SSH).
 
@@ -97,9 +100,18 @@ Pour que cela fonctionne il faut modifier deux choses :
 - la configuration SSH du serveur ;
 - la configuration du fichier `.gitsubmodules` (attention de ne le faire que sur la branche prévue pour le déploiement).
 
+Ces opérations seront détaillées dans la suite de cette procédure.
+
+### 3 - Ajouter les clefs de déploiement sur les dépôts
+
+L'ajout d'une clef SSH pour un dépôt Github se fait comme présenté par le Gif ci-dessous :
+
+![Ajout d'une clef de déploiement sur Github](add-deploy-key.gif)
+
 ### 4 - Configurer le client SSH du serveur
 
-**Sur le serveur**, une configuration SSH doit être ajoutée, la voici (ce fichier est contenu dans le /home/nom-utilisateur/.ssh) :
+**Sur le serveur**, une configuration SSH doit être ajoutée, la voici (ce fichier nommé `config` est contenu dans le dossier `/home/nom-utilisateur/.ssh`) :
+
 ```conf
 # Clé pour le dépôt principal
 Host github.com
@@ -151,7 +163,7 @@ Pour que la nouvelle configuration SSH puisse être utilisée à partir du serve
 ```
 
 > [!WARNING]  
-> Modifiez ces URL uniquement sur une branche spécifique de déploiement sous peine de CASSER LE MONDE.
+> Modifiez ces URL uniquement sur une branche spécifique de déploiement sous peine de **CASSER LE MONDE**.
 
 > [!WARNING]  
 > Il faut **bien veiller** à ce que toutes les clefs SSH existent dans le dossier `~/.ssh` (cf. partie précédente).
@@ -228,7 +240,6 @@ Voici une sélection :
 `apt get install <nom-logiciel>` : le VPS fourni est un système Ubuntu basé sur le gestionnaire de paquets `apt get`
 
 Vous pouvez essayer d'installer un logiciel en utilisant la commande suivante (pour nano, éditeur de texte en ligne de commande) : `apt get install nano`
-
 
 ### Commandes Docker
 
